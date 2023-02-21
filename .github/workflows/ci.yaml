@@ -30,9 +30,9 @@ jobs:
           path: |
             ~/.cache/pip
           key: ${{ runner.os }}-${{ hashFiles('pyproject.toml') }}
-      - run: pip install -U pip wheel
-      - run: pip install -e '.[tests]'
-      - run: pytest --junit-xml=test-report/report.xml tests
+      - run: pip install -U pip wheel hatch
+      - run: hatch run test --junit-xml=test-report/report.xml tests
+      # TODO: add step for uploading coverage report to codecov.io
 
   build-n-publish:
     if: github.event_name == 'release'
