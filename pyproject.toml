@@ -47,7 +47,8 @@ path = "src/astro-sdk-template/__init__.py"
 
 [tool.hatch.envs.test]
 dependencies = [
-  "pytest"
+  "pytest",
+  "pytest-cov",
 ]
 
 [tool.hatch.envs.docs]
@@ -76,7 +77,7 @@ fix = true
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "--tb=short --cov=astronomer --cov-report=xml"
+addopts = "--tb=short --cov=src --cov-report=xml"
 testpaths = [
     "tests",
 ]

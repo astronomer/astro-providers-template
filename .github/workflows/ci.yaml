@@ -30,8 +30,9 @@ jobs:
           path: |
             ~/.cache/pip
           key: ${{ runner.os }}-${{ hashFiles('pyproject.toml') }}
-      - run: pip install -U pip wheel hatch
-      - run: hatch run test --junit-xml=test-report/report.xml tests
+      # TODO: deduplicate this step with the one in pyproject.toml hatchling environment
+      - run: pip install -U pip wheel hatch pytest pytest-cov
+      - run: pytest --junit-xml=test-report/report.xml tests
       # TODO: add step for uploading coverage report to codecov.io
 
   build-n-publish:
@@ -52,7 +53,7 @@ jobs:
         key: ${{ runner.os }}-{{ hashFiles('pyproject.toml') }}
     - name: Verify Git Tag and package version
       run: python3 .github/scripts/verify_tag_and_version.py
-    - run: pip3 install -U pip wheel build twine
+    - run: pip3 install -U pip wheel build twine hatch
     - run: python3 -m build
     - run: twine check dist/*
     - run: twine upload dist/*
