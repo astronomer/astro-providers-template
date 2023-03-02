@@ -43,7 +43,7 @@ Homepage = "https://github.com/astronomer/astronomer-sdk-template"
 Documentation = "https://github.com/astronomer/astronomer-sdk-template"
 
 [tool.hatch.version]
-path = "src/astro-sdk-template/__init__.py"
+path = "src/astro_sdk_template/__init__.py"
 
 [tool.hatch.envs.test]
 dependencies = [
